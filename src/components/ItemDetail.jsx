@@ -1,8 +1,22 @@
+import { useState } from 'react'
 import ItemCount from './ItemCount'
+import {useCartContext} from '../context/CartContext'
+import { Link } from 'react-router-dom'
+
 
 const ItemDetail = item => {
 
   const { title, description, img, price, stock } = item
+  
+  const [goToCart, setGoToCart] = useState(false)
+
+  const {addItem} = useCartContext();
+
+  const onAdd = (count) => {
+    setGoToCart(true);
+    addItem(item,count);
+  }
+
 
   return (
     <>
@@ -43,17 +57,28 @@ const ItemDetail = item => {
 
                 </span>
 
+                <div>
+                  {
+                    goToCart
+                      ?
+                      <div className='py-8'>
+                        <Link to={'/'}><button className='px-4 py-2 hover:bg-violet-100 text-center text-sm text-purple-500 rounded duration-300'>
+                          Seguir comprando</button>
+                        </Link>
+                        <Link to={'/cart'}><button className='px-4 py-2 m-2 bg-purple-500 hover:bg-violet-700 text-center text-sm text-white rounded duration-300'>
+                          Ver mi carrito</button>
+                        </Link>
+                      </div>
 
-                <ItemCount stock={stock} initial={1} />
+                      :
+                      <ItemCount stock={stock} initial={0} onAdd={onAdd} />
+                  }
+                </div>
+
               </div>
-
             </div>
-
           </div>
-
-
         </div>
-
       </section>
 
     </>

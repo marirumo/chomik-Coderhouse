@@ -33,7 +33,7 @@ const NavBar = () => {
               <div className="hidden sm:block sm:ml-9">
                 <div className="flex space-x-4">
 
-                  <Link to='/' className="bg-orange-200 text-slate-900 px-3 py-2 rounded-md text-sm font-bold">Home</Link>
+                  <Link to='/' className="text-slate-900 hover:bg-orange-400 hover:text-white block px-3 py-2 rounded-md text-sm font-medium">Home</Link>
 
                   <Link to='/categoria/escondite' className="text-slate-900 hover:bg-orange-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Escondite</Link>
 
@@ -59,7 +59,7 @@ const NavBar = () => {
         <div className="sm:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1">
 
-            <Link to='/' className="bg-orange-200 text-slate-900 block px-3 py-2 rounded-md text-base font-bold">Home</Link>
+            <Link to='/' className="text-slate-900 hover:bg-orange-400 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</Link>
 
             <Link to='/categoria/:categoryId' className="text-slate-900 hover:bg-orange-400 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Escondite</Link>
 
