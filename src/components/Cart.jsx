@@ -2,7 +2,7 @@ import {useCartContext} from '../context/CartContext'
 
 const Cart = () => {
     
-    const { cart } = useCartContext()
+    const { cart, getTotalCart } = useCartContext()
 
     return (
         <div>
@@ -11,26 +11,22 @@ const Cart = () => {
                 
                 <div>
                     <h2>Tu carrito</h2>
-                    <div >
-                        <h3>Item</h3>
-                        <h3>Cantidad</h3>
-                        <h3>Stock</h3>
-                    </div>
+                   
 
                     <ul>
                         {cart.map((item) => 
-                            <li>
-                                <div>
+                            <li key={item.id}>
                                 
-                                    <span><img src={item.img} alt='item' /></span>
+                                    <span> <img src={item.img} alt='item' /></span>
                                     <span>{item.title}</span>
-                                </div>
-                                <div>{item.price}</div>
-                                <div>{item.stock}</div>
+                                    <span>Precio ${item.price}</span>
+                                
                             </li>
                             )
                         }
                     </ul>
+
+                    <div>Total de items {getTotalCart()}</div>
                     
                 </div>
                 ) : (<h2>Tu carrito está vacío.</h2>)}

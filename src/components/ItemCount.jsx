@@ -39,7 +39,7 @@ const ItemCount = ({ stock, initial, onAdd }) => {
 
         </div>
 
-        <button disabled={count <= 0} onClick={() => onAdd()}
+        <button disabled={count <= 0} onClick={() => onAdd(count)}
           className='px-4 py-2 bg-purple-500 hover:bg-violet-700 disabled:opacity-75 text-center text-sm text-white rounded duration-300'>
           Agregar al carrito
         </button>

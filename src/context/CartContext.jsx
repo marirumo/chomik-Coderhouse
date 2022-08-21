@@ -9,14 +9,14 @@ const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]) //items en mi carrito
 
     // 1. addItem al carrito 
-    const addItem = (product, count) => {
+    const addItem = (product, qty) => {
 
-    let cartProduct = { product, count }
+    let cartProduct = { product, qty }
     let cartAux = []
 
-    if (isInCart(product)) {
+    if (isInCart (product)) {
       cartProduct = cart.find(item => item.product === product)
-      cartProduct.count = cartProduct.count + count
+      cartProduct.qty = cartProduct.qty + qty
       cartAux = [...cart]
     } else {
       cartAux = [cartProduct, ...cart]
@@ -46,7 +46,7 @@ const CartProvider = ({ children }) => {
 
     //5. total de productos en carrito
     const getTotalCart = () => 
-    cart.reduce((acc, elem) => acc + elem.count, 0); 
+    cart.reduce((acc, elem) => acc + elem.qty, 0); 
 
 
     return (
