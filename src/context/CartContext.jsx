@@ -2,11 +2,13 @@ import React, { useContext, useState } from "react";
 
 const CartContext = React.createContext([]);
 
+//custom hook
 export const useCartContext = () => useContext(CartContext);
 
 const CartProvider = ({ children }) => {
 
     const [cart, setCart] = useState([]) //items en mi carrito
+   
 
     // 1. addItem al carrito 
     const addItem = (product, qty) => {
@@ -23,7 +25,8 @@ const CartProvider = ({ children }) => {
     }
     setCart(cartAux)
   }
-    console.log('carrito:', cart)
+  console.log('carrito:', cart)
+    
 
     // 2. removeItems
     const removeItem = (item) => {
@@ -45,9 +48,10 @@ const CartProvider = ({ children }) => {
     }
 
     //5. total de productos en carrito
-    const getTotalCart = () => 
-    cart.reduce((acc, elem) => acc + elem.qty, 0); 
-
+    const getTotalCart = () => {
+        return cart.reduce((acc, item) => acc + item.qty, 0)
+    }
+   
 
     return (
         <CartContext.Provider value={{
@@ -57,7 +61,7 @@ const CartProvider = ({ children }) => {
             removeItem, 
             clear, 
             isInCart,
-            getTotalCart
+            getTotalCart,
             }}>
 
             {children}

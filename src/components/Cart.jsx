@@ -1,38 +1,41 @@
-import {useCartContext} from '../context/CartContext'
+import { useCartContext } from '../context/CartContext'
 
-const Cart = () => {
+const Cart = (item) => {
+
+    const { cart, getTotalCart} = useCartContext()
     
-    const { cart, getTotalCart } = useCartContext()
-
     return (
-        <div>
-            <div >
-            {cart.length ? (
-                
-                <div>
-                    <h2>Tu carrito</h2>
-                   
+        <>
 
-                    <ul>
-                        {cart.map((item) => 
-                            <li key={item.id}>
-                                
-                                    <span> <img src={item.img} alt='item' /></span>
-                                    <span>{item.title}</span>
-                                    <span>Precio ${item.price}</span>
-                                
-                            </li>
-                            )
-                        }
-                    </ul>
+            <div className='container mx-auto mt-10'>
+                <div className='w-3/4 px-10 py-10'>
 
-                    <div>Total de items {getTotalCart()}</div>
-                    
+                    {cart.length ? (
+
+                        <div className='flex justify-between border-b pb-8'>
+                            <h1 className='font-semibold text-2xl'>Tu carrito</h1>
+                            <h2 className='font-semibold text-2xl'>Productos {getTotalCart()}</h2>
+
+
+                            <ul>
+                                {cart.map((item) =>
+
+                                    <li key={item.id}>
+                                    </li>
+
+                                )
+                                }
+                            </ul>
+
+                        </div>
+
+                    )
+                        :
+                        (<h2>Tu carrito está vacío.</h2>)}
+
                 </div>
-                ) : (<h2>Tu carrito está vacío.</h2>)}
-                
             </div>
-        </div>
+        </>
     )
 }
 
