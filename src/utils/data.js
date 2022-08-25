@@ -24,7 +24,7 @@ export const ITEMS = [
 		id: '2',
 		title: 'Terrarium',
 		description: 'Gran vista y diseño moderno: fabricado con vidrio templado, diseñamos 3 ventanas de vista que logran su observación desde muchos ángulos y en cualquier momento. La característica de color fresco y aspecto moderno combina con el entorno de tu hogar de forma natural, enriquece la vida de tu hamster. La decoración en jaulass se vende por separado, no incluida',
-		category: 'jaulass',
+		category: 'jaulas',
 		img: terrario1,
 		price: 820,
 		stock: 3,

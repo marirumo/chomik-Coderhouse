@@ -20,8 +20,8 @@ const ItemDetailContainer = () => {
 
 
 	return (
-		<div className='bg-violet-100'>
-			<ItemDetail {...item} />
+		<div >
+			<ItemDetail {...item}  />
 		</div>
 	);
 }

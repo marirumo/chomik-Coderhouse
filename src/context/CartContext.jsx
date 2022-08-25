@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 
 const CartContext = React.createContext([]);
 
@@ -7,45 +7,52 @@ export const useCartContext = () => useContext(CartContext);
 
 const CartProvider = ({ children }) => {
 
-    const [cart, setCart] = useState([]) //items en mi carrito
-    const [total, setTotal] = useState(0) //Items totales en carrito
-
-
-    // 1. addItem al carrito 
-    const addItem = (product, qty) => {
-
-    let cartProduct = { product, qty }
-    let cartAux = []
-
-    if (isInCart (product)) {
-      cartProduct = cart.find(item => item.product === product)
-      cartProduct.qty = cartProduct.qty + qty
-      cartAux = [...cart]
-    } else {
-      cartAux = [cartProduct, ...cart]
-    }
-    setCart(cartAux)
-  }
-  console.log('carrito:', cart)
+    //items en mi carrito
+    const [cart, setCart] = useState([])
     
 
-    // 2. removeItems
-    const removeItem = (item) => {
+    // 1. addItem al carrito 
+    const addItem = (item, qty) => {
 
-        if (isInCart(item)) {
-            const updateCart = cart.filter(elem => elem.item.id !== item.id) || []
-            setCart(updateCart)
+        if(cart.some(elem => elem.id === item.id)){
+            
+            let index = cart.findIndex(el => el.id === item.id);
+            let product = cart[index];
+            product.qty = product.qty + qty;
+
+            const newCart = [...cart];
+            newCart.splice( index, 1, product );
+
+            setCart([ ...newCart ]);
+
+        }else{
+            
+            let product = {...item, qty};
+            setCart([...cart, product ]);
         }
     }
+  
+    
+    // 2. removeItems
+    const removeItem = (product) => {
+        const newCart = [...cart];
+        let index = newCart.findIndex(elem => elem.product === product);
+        
+        newCart.splice( index, 1 );
 
+        setCart([...newCart]);
+    }
+
+
+    
     //3.Limpiar carrito (todos los elementos)
     const clear = () => {
         setCart([])
     }
 
     //4. Revisar si el item está en el carrito
-    const isInCart = (id) => {
-        return cart && cart.some(elem => elem.id === id)
+    const isInCart = (product) => {
+        return cart && cart.some(elem => elem.item.id === product.id)
     }
 
     //5. total de productos en carrito
@@ -53,10 +60,10 @@ const CartProvider = ({ children }) => {
         return cart.reduce((acc, item) => acc + item.qty, 0)
     }
    
-    useEffect(() => {
-        setTotal(getTotalCart())
-    }, [cart])
-
+    //6. total price
+    const getTotalPrice = () => {
+        return cart.reduce((acc, item) => acc + item.qty * item.price, 0);
+    }
 
 
     return (
@@ -68,6 +75,7 @@ const CartProvider = ({ children }) => {
             clear, 
             isInCart,
             getTotalCart,
+            getTotalPrice,
             }}>
 
             {children}

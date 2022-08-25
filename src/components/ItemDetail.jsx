@@ -21,7 +21,7 @@ const ItemDetail = item => {
   return (
     <>
 
-      <section className='text-gray-700 body-font overflow-hidden bg-white'>
+      <section className='text-gray-700 body-font overflow-hidden'>
 
         <div className='container px-5 py-24 mx-auto'>
 
@@ -50,12 +50,6 @@ const ItemDetail = item => {
               </div>
 
               <div>
-
-                <span className='text-sm text-gray-500 dark:text-gray-400'>
-
-                  Stock disponible: {stock}
-
-                </span>
 
                 <div>
                   {

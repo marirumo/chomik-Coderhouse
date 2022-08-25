@@ -11,7 +11,6 @@ const ItemListContainer = () => {
 
     const { categoryId } = useParams();
 
-
     useEffect(() => {
 
         const asyncFunction = categoryId ? getProductsByCategory : getProducts
@@ -22,8 +21,6 @@ const ItemListContainer = () => {
     },
         [categoryId])
 
-
-
     return (
 
         <>
@@ -33,7 +30,6 @@ const ItemListContainer = () => {
                     <ItemList product={product} />
 
                 </div>
-
 
             </main>
         </>
