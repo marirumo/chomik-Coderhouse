@@ -32,9 +32,8 @@ const CartProvider = ({ children }) => {
         }
     }
   
-    
     // 2. removeItems
-    const removeItem = (product) => {
+    const removeItems = (product) => {
         const newCart = [...cart];
         let index = newCart.findIndex(elem => elem.product === product);
         
@@ -42,8 +41,6 @@ const CartProvider = ({ children }) => {
 
         setCart([...newCart]);
     }
-
-
     
     //3.Limpiar carrito (todos los elementos)
     const clear = () => {
@@ -51,8 +48,8 @@ const CartProvider = ({ children }) => {
     }
 
     //4. Revisar si el item está en el carrito
-    const isInCart = (product) => {
-        return cart && cart.some(elem => elem.item.id === product.id)
+    const isInCart = product => {
+        return cart && cart.some(elem => elem.id === product.id)
     }
 
     //5. total de productos en carrito
@@ -65,13 +62,12 @@ const CartProvider = ({ children }) => {
         return cart.reduce((acc, item) => acc + item.qty * item.price, 0);
     }
 
-
     return (
         <CartContext.Provider value={{
             cart, 
             setCart, 
             addItem, 
-            removeItem, 
+            removeItems, 
             clear, 
             isInCart,
             getTotalCart,
