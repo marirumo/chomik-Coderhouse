@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom"
 import ItemList from './ItemList';
-import { getProductsByCategory } from '../utils/helpers';
-import { getProducts } from '../utils/helpers';
+import firestoreDB from '../services/config';
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 
 const ItemListContainer = () => {
@@ -13,13 +13,30 @@ const ItemListContainer = () => {
 
     useEffect(() => {
 
-        const asyncFunction = categoryId ? getProductsByCategory : getProducts
+        const itemsCollection = collection(firestoreDB, 'hamstershop');
+       
+		if (categoryId) {
+			const queryFilter = query(
+				itemsCollection,
+				where("category", "==", categoryId),
+			);
+			
+			getDocs(queryFilter)
+			.then((res) =>
+				setProduct(
+					res.docs.map((product) => ({ id: product.id, ...product.data() })),
+				),
+			);
+		} else {
+			getDocs(itemsCollection)
+			.then((res) =>
+				setProduct(
+					res.docs.map((product) => ({ id: product.id, ...product.data() })),
+				),
+			);
+		}
+	}, [categoryId]);
 
-        asyncFunction(categoryId)
-            .then((res) => setProduct(res))
-            .catch((error) => alert(error));
-    },
-        [categoryId])
 
     return (
 

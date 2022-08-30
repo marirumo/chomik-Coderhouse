@@ -1,29 +1,35 @@
-import ItemDetail from './ItemDetail';
+import ItemDetail from './ItemDetail'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getProductById } from '../utils/helpers';
+import { doc, getDoc } from "firebase/firestore";
+import firestoreDB from '../services/config';
 
 
 const ItemDetailContainer = () => {
 
-	const [item, setItem] = useState({})
+	const [productDetail, setProductDetail] = useState({})
+	const [loading, setLoading] = useState(true)
 
 	const { id } = useParams()
 
-
 	useEffect(() => {
-		getProductById(id)
-			.then((res) => setItem(res))
-			.catch((error) => alert(error));
-	},
-		[id]);
-
-
-	return (
-		<div >
-			<ItemDetail {...item}  />
-		</div>
-	);
+        setLoading(true)
+        const ref = doc(firestoreDB, 'hamstershop', id)
+        getDoc(ref).then((response) => {
+            setLoading (false)
+            setProductDetail({
+                id: response.id,
+                ...response.data(),
+            })
+        })
+    }, [id])
+	
+    return (
+      loading ? 
+            <span>Cargando...</span>
+            : 
+            <div><ItemDetail {...productDetail} /></div>
+    )
 }
 
 export default ItemDetailContainer
