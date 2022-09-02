@@ -9,7 +9,6 @@ const CartProvider = ({ children }) => {
 
     //items en mi carrito
     const [cart, setCart] = useState([])
-    
 
     // 1. addItem al carrito 
     const addItem = (item, qty) => {

@@ -7,27 +7,27 @@ import firestoreDB from '../services/config';
 
 const ItemDetailContainer = () => {
 
-	const [productDetail, setProductDetail] = useState({})
-	const [loading, setLoading] = useState(true)
+    const [productDetail, setProductDetail] = useState({})
+    const [loading, setLoading] = useState(true)
 
-	const { id } = useParams()
+    const { id } = useParams()
 
-	useEffect(() => {
+    useEffect(() => {
         setLoading(true)
         const ref = doc(firestoreDB, 'hamstershop', id)
         getDoc(ref).then((response) => {
-            setLoading (false)
+            setLoading(false)
             setProductDetail({
                 id: response.id,
                 ...response.data(),
             })
         })
     }, [id])
-	
+
     return (
-      loading ? 
+        loading ?
             <span>Cargando...</span>
-            : 
+            :
             <div><ItemDetail {...productDetail} /></div>
     )
 }
