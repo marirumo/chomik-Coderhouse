@@ -61,6 +61,20 @@ const CartProvider = ({ children }) => {
         return cart.reduce((acc, item) => acc + item.qty * item.price, 0);
     }
 
+    //7. Precio envío
+    let shipping = () => {
+        return getTotalPrice() < 350 ? 0 : 350
+    }
+
+    //8. Precio final
+    let total = () => {
+        return getTotalPrice() > 0 ?
+           getTotalPrice() + shipping() :
+            0
+    } 
+
+
+
     return (
         <CartContext.Provider value={{
             cart, 
@@ -71,6 +85,8 @@ const CartProvider = ({ children }) => {
             isInCart,
             getTotalCart,
             getTotalPrice,
+            shipping,
+            total
             }}>
 
             {children}

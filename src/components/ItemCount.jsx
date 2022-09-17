@@ -19,9 +19,9 @@ const ItemCount = ({ stock, initial, onAdd }) => {
 
   return (
     <>
-      <div className='rounded-md space-x-4 space-y-6'>
+      <div className='mt-4 space-y-6'>
 
-        <div className='flex border justify-between border-gray-300 p-1 rounded-md'>
+        <div className='flex border justify-between border-gray-300 p-1 rounded-md w-1/3'>
           
           <button disabled={count <= 1} onClick={() => decrease({ initial })}
             className='bg-purple-500 text-white border p-1 rounded disabled:opacity-75'>
@@ -40,7 +40,7 @@ const ItemCount = ({ stock, initial, onAdd }) => {
         </div>
 
         <button disabled={count <= 0} onClick={() => onAdd(count)}
-          className='px-4 py-2 bg-purple-500 hover:bg-violet-700 disabled:opacity-75 text-center text-sm text-white rounded duration-300'>
+          className='px-4 py-2 bg-purple-500 hover:bg-violet-700 disabled:opacity-75 text-center text-bold text-white rounded duration-300'>
           Agregar al carrito
         </button>
 

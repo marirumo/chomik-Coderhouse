@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom"
-import ItemList from './ItemList';
+import { useParams } from 'react-router-dom'
+import ItemList from '../pages/ItemList';
 import firestoreDB from '../services/config';
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where } from 'firebase/firestore';
 
 
 const ItemListContainer = () => {
@@ -18,7 +18,7 @@ const ItemListContainer = () => {
 		if (categoryId) {
 			const queryFilter = query(
 				itemsCollection,
-				where("category", "==", categoryId),
+				where('category', '==', categoryId),
 			);
 
 			getDocs(queryFilter)
